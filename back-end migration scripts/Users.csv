@@ -1,0 +1,4 @@
+﻿firstName,lastName,email,password,role,liked
+Andrew,John,john@gmail.com,$2a$09$fNchaF6tCwWy0fCdUdEy8O/qJZkKW7uCAP0CHvtxG.jRpxYW0Dlx2,user,"32,37,66,67,70,40,80,86,64"
+Rachel,Mary,rachel@gmail.com,$2a$09$fNchaF6tCwWy0fCdUdEy8O/qJZkKW7uCAP0CHvtxG.jRpxYW0Dlx2,user,"37,64,67,66,51,53"
+admin,admin,admin@gmail.com,$2a$09$fNchaF6tCwWy0fCdUdEy8O/qJZkKW7uCAP0CHvtxG.jRpxYW0Dlx2,admin,"67,32"

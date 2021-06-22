@@ -1,0 +1,21 @@
+<div class="form-container">
+  <form class="login-form" [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput name="email" type="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        matInput
+        name="password"
+        type="password"
+      />
+    </mat-form-field>
+    <button (click)="onSubmitForm()" mat-raised-button color="accent">
+      Submit
+    </button>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+//Load Book Data from Books.csv
+LOAD CSV WITH HEADERS FROM "file:///D:/Books.csv" AS line
+MERGE (b:Book {	title: line.title,
+		        authors: line.authors,
+                language: line.language,
+                publishedDate: line.publishedDate,
+                pageCount: toInteger(line.pageCount),
+		        description: line.description,
+                isbn_13: line.isbn_13,
+                isbn_10: line.isbn_10,
+                publisher: line.publisher,
+                thumbnail: line.thumbnail,
+                endorsements: toInteger(line.likes),
+                discipline: line.discipline})
+WITH b, line
+UNWIND split(line.keywords,",") AS key_name
+MERGE (s:Keyword {name:key_name})
+MERGE (b)-[r1:keyword]->(s)
+MERGE (d:Discipline {name:line.discipline})
+MERGE (b)-[r3:discipline]->(d)
+
+//Load User Data from Users.csv
+LOAD CSV WITH HEADERS FROM "file:///Users.csv" AS line
+MERGE (b:User {	firstName:	line.firstName,
+		lastName:	line.lastName,
+		email:		line.email,
+		password:	line.password,
+		role:		line.role
+        })
+WITH b, line
+UNWIND split(line.liked,",") AS id_book
+MATCH (n:Book) WHERE id(n) = toInteger(id_book)
+SET n.endorsements = n.endorsements +1
+MERGE (b)-[r:liked]->(n)

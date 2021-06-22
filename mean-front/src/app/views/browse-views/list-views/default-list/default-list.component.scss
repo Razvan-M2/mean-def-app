@@ -1,0 +1,95 @@
+$primary: #673ab7;
+$accent: #ffd740;
+
+.c-list {
+  padding: 5px;
+}
+
+.c-list-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+  transition: all 50ms ease-out;
+  margin: 30px 0px 30px 0px;
+
+  .c-list-item-header {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    font-weight: bold;
+    font-size: 150%;
+
+    .c-list-item-header-title {
+      text-decoration: none;
+      color: black;
+    }
+
+    .c-list-item-header-title:hover {
+      color: $primary;
+    }
+
+    .c-list-item-interactive-block {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-content: center;
+      width: 10%;
+
+      .interactive-block-icon:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .c-list-item-content {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 5px;
+    font-size: large;
+
+    .c-list-item-cover {
+      min-height: 240px;
+      min-width: 180px;
+      padding: 10px;
+    }
+
+    .c-list-item-details {
+      padding: 15px;
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .c-list-item-details-section {
+        font-weight: 600;
+        margin-right: 10px;
+      }
+
+      .c-list-item-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+      }
+    }
+    .c-list-item-details > * {
+      margin-top: 10px;
+    }
+  }
+}
+
+.c-list-item:hover {
+  box-shadow: 0 0 6px $primary;
+}
+
+:host ::ng-deep .highlighted {
+  background-color: gold;
+}

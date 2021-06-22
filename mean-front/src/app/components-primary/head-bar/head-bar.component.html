@@ -1,0 +1,51 @@
+<mat-toolbar class="main-toolbar" color="primary">
+  <!-- <div class="logoContainer" [routerLink]="['/']">
+    <h2>GraphBook</h2>
+  </div> -->
+  <button
+    class="logoContainer head-bar-button"
+    [routerLink]="['/']"
+    mat-flat-button
+    color="primary"
+  >
+    <h2>GraphBook</h2>
+  </button>
+
+  <!-- <div class="userPanel">
+    <span class="name_user">{{ nameUser }}</span>
+    <mat-icon>account_circle</mat-icon>
+  </div> -->
+  <button
+    *ngIf="this.userPresent; else elseLinks"
+    color="primary"
+    class="head-bar-button details-button"
+    mat-flat-button
+    [matMenuTriggerFor]="menu"
+  >
+    <span class="name-user-label">{{ nameUser }}</span>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button [routerLink]="['book-recommendations']" mat-menu-item>
+      <mat-icon>menu_book</mat-icon>
+      <span>View Recommendations</span>
+    </button>
+    <button mat-menu-item (click)="onRequestLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+  <ng-template #elseLinks>
+    <div>
+      <button mat-flat-button color="primary" routerLink="/login">
+        Login
+        <!-- <a color="primary" [routerLink]="['/login']" class="button-link"></a> -->
+      </button>
+      <button mat-flat-button color="primary" routerLink="/register">
+        Register
+        <!-- <a color="primary" [routerLink]="['/login']" class="button-link"></a> -->
+      </button>
+    </div>
+  </ng-template>
+</mat-toolbar>

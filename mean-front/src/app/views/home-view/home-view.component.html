@@ -1,0 +1,38 @@
+<app-page-header [pageTitle]="this.title"></app-page-header>
+<div class="container">
+  <div class="headline">
+    <h1 class="headline-section">Welcome to GraphBook!</h1>
+    <h2 class="headline-section">Explore some Books!</h2>
+  </div>
+  <form class="home-form">
+    <mat-form-field appearance="outline" class="field controller" id="search">
+      <mat-label>Search for a book</mat-label>
+      <input matInput name="search" [formControl]="searchText" />
+      <mat-error *ngIf="searchText.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      appearance="outline"
+      class="field controller"
+      id="discipline"
+    >
+      <mat-label>Choose Discipline</mat-label>
+      <mat-select [(ngModel)]="selectedDiscipline" name="discipline">
+        <mat-option
+          *ngFor="let discipline of data.disciplines"
+          [value]="discipline"
+          >{{ discipline }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <div class="submit-container">
+    <button
+      class="submit-button-style controller"
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Search!
+    </button>
+  </div>
+</div>

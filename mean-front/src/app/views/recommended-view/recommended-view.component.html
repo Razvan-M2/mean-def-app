@@ -1,0 +1,55 @@
+<div class="list-section">
+  <div class="c-list">
+    <div class="c-list-item" *ngFor="let item of books">
+      <div class="c-list-item-header">
+        <a
+          class="c-list-item-header-title"
+          [routerLink]="['/browse', item.recommendation.id]"
+        >
+          {{ item.recommendation.title }}
+        </a>
+        <div class="c-list-item-interactive-block">
+          <span
+            class="material-icons interactive-block-icon"
+            (click)="reviewBook(false, item.recommendation.id)"
+            [innerHTML]="
+              item.recommendation.liked ? 'thumb_up_alt' : 'thumb_up_off_alt'
+            "
+          >
+          </span>
+          <span>{{ item.recommendation.endorsements }}</span>
+        </div>
+      </div>
+      <div class="c-list-item-content">
+        <img
+          width="140px"
+          height="200px"
+          class="c-list-item-cover"
+          src="{{ item.recommendation.thumbnail }}"
+          alt="Book Cover"
+        />
+        <div class="c-list-item-details">
+          <span
+            ><span class="c-list-item-details-section">Author:</span>
+            {{ item.recommendation.authors }}</span
+          >
+          <span
+            ><span class="c-list-item-details-section">Year:</span>
+            {{ item.recommendation.publishedDate }}</span
+          >
+          <span class="c-list-item-text">{{
+            item.recommendation.description
+          }}</span>
+        </div>
+      </div>
+      <div class="c-list-item-linked">
+        Because you liked:
+        <a
+          class="c-list-item-header-title"
+          [routerLink]="['/browse', item.book.id]"
+          >{{ item.book.title }}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

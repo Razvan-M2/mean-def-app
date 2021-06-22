@@ -1,0 +1,81 @@
+$primary: #673ab7;
+$accent: #ffd740;
+
+$book-content-height: 350px;
+$book-content-width: 220px;
+
+$book-cover-height: 250px;
+$book-cover-width: 200px;
+
+.cards {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-gap: 3rem;
+
+  .card {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    .card-content {
+      height: $book-content-height;
+      padding: 0.3rem;
+      cursor: pointer;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+      transition: all 50ms ease-out;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+
+      .card-content-pic {
+        width: $book-cover-width;
+        height: $book-cover-height;
+        margin: 5px auto 5px auto;
+      }
+      .card-content-heading {
+        font-weight: bold;
+        text-align: center;
+        padding: 4px 2px 2px 4px;
+      }
+    }
+    .card-content:hover {
+      box-shadow: 0 0 6px $primary;
+    }
+  }
+}
+
+@media (min-width: 400px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 540px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 840px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1150px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// @media (min-width: 1400px) {
+//   .cards {
+//     grid-template-columns: repeat(5, 1fr);
+//   }
+// }
+
+:host ::ng-deep .highlighted {
+  background-color: gold;
+}

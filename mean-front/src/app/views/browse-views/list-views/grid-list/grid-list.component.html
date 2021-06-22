@@ -1,0 +1,35 @@
+<!-- <mat-grid-list cols="2" rowHeight="300px" gutterSize="20px">
+  <mat-grid-tile
+    *ngFor="let item of data.books"
+    [routerLink]="['/browse', item.Isbn]"
+  >
+    <div class="grid-tile-item">
+      <img
+        src="{{ item.Cover }}"
+        alt="book-cover"
+        width="140px"
+        height="200px"
+      />
+    </div>
+    <mat-grid-tile-footer class="grid-tile-item-footer">{{
+      item.Title
+    }}</mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list> -->
+
+<div class="cards">
+  <div
+    class="card"
+    *ngFor="let book of data.books"
+    [routerLink]="['/browse', book.id]"
+  >
+    <div class="card-content">
+      <img
+        class="card-content-pic"
+        src="{{ book.thumbnail }}"
+        alt="book-cover"
+      />
+      <p class="card-content-heading">{{ book.title }}</p>
+    </div>
+  </div>
+</div>

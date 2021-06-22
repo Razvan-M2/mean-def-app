@@ -1,0 +1,41 @@
+.browse-section-header {
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  padding: 15px 5px 15px 5px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+
+  .header-content-column {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    .form-item {
+      margin-right: 10px;
+    }
+  }
+}
+#search {
+  flex-grow: 3;
+}
+#filter {
+  flex-grow: 1;
+}
+
+$primary: #673ab7;
+$accent: #ffd740;
+
+.list-section {
+  width: 70%;
+  margin: auto;
+  .list {
+    display: flex;
+    align-content: center;
+  }
+  .list-section-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

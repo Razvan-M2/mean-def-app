@@ -1,0 +1,12 @@
+# Added more or less to cover server unintended packages
+
+# compiled output
+#/public
+/server/public
+
+# dependencies
+/node_modules
+/mean-front/node_modules
+
+# loggs output
+search.log

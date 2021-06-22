@@ -1,0 +1,35 @@
+.main-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin:auto;
+    margin-top:30px;
+}
+
+.main-column{
+    width:25%;
+}
+
+.keyword-card{
+    display:flex;
+    flex-direction:column;
+    align-content: space-between;
+    padding: 25px 20px 25px 20px
+    // max-width:25%;
+}
+
+mat-selection-list{
+    margin-bottom:50px;
+    max-height: 400px;
+    overflow: auto;
+}
+.keyword-container-input{
+    margin-top:50px;
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+}
+
+.card-controllers{
+    padding:10px;
+}

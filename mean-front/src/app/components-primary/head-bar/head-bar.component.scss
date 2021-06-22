@@ -1,0 +1,23 @@
+.main-toolbar {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 3%;
+  padding-right: 3%;
+  .head-bar-button {
+    cursor: pointer;
+    .button-link {
+      text-decoration: none;
+    }
+  }
+  .details-button {
+    display: flex;
+    min-width: 50px;
+    flex-direction: row;
+    justify-content: space-between;
+    .name-user-label {
+      margin-right: 5px;
+    }
+  }
+}
