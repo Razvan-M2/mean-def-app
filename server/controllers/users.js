@@ -129,7 +129,7 @@ exports.getRecommendedBooks = asyncHandler(async (req, res, next) => {
     console.log(idUser);
 
     const result = await neodeInstance.readCypher(
-        "Match(u:User)-[r1:liked]->(b:Book)-[r2:keyword]->(k:Keyword)<-[r3:keyword]-(b2:Book) where id(u) = $idUser and not (u)-[:liked]->(b2) with b as Liked_Book, collect(k.name) as Linked_Keywords, b2 as Suggested_Book call { with Linked_Keywords return size(Linked_Keywords) as NrOfLinks order by NrOfLinks DESC limit 1 } call { with Suggested_Book  return collect(Suggested_Book) as Suggested_Books } return Liked_Book, collect(Suggested_Book) as Suggestions",
+        "Match(u:User)-[r1:liked]->(b:Book)-[r2:keyword]->(k:Keyword)<-[r3:keyword]-(b2:Book) where id(u) = $idUser and not (u)-[:liked]->(b2) with b as Liked_Book, collect(k.name) as Linked_Keywords, b2 as Suggested_Book call { with Linked_Keywords return size(Linked_Keywords) as NrOfLinks order by NrOfLinks DESC limit 1 } call { with Suggested_Book  return collect(Suggested_Book) as Suggested_Books } return Liked_Book, collect(Suggested_Book) as Suggestions LIMIT 5",
         { idUser: idUser }
     );
     const data = [];

@@ -13,6 +13,7 @@ export class AuthService {
   private token: string;
   private tokenExpire: Date;
   private authStatusListener = new Subject<boolean>();
+  private authRoleListener = new Subject<string>();
   private userUpdated = new Subject<any>();
   private isAuthenticated = false;
   private tokenTimer: any;
@@ -34,6 +35,10 @@ export class AuthService {
 
   getUserRole() {
     return this.userRole;
+  }
+
+  getRoleTypeListener() {
+    return this.authRoleListener.asObservable();
   }
 
   login(authData: UserFormData) {
@@ -145,6 +150,7 @@ export class AuthService {
       .pipe(
         map((resData: { success: boolean; data: any }) => {
           this.userRole = resData.data.role;
+          this.authRoleListener.next(this.userRole);
           return resData.data;
         })
       )
