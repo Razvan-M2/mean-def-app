@@ -45,20 +45,24 @@ export class BookService {
       .subscribe(
         (transformedData: BookBundle) => {
           this.books = transformedData;
-          // console.log(this.books);
+
           this.booksUpdated.next({
             data: [...this.books.data],
             count: transformedData.count,
           });
-          return true;
+          if (this.books.count > 0) {
+            return true;
+          } else {
+            this.matSnackBar.open('No books were found', 'Close', {
+              duration: 1500,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
+            return false;
+          }
         },
         (error: HttpErrorResponse) => {
           console.log(error);
-          this.matSnackBar.open('No content availabe.', 'Close', {
-            duration: 1500,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
           this.booksUpdated.next({
             data: [],
             count: 0,
@@ -66,7 +70,6 @@ export class BookService {
           return false;
         }
       );
-    return false;
   }
 
   getGoogleBooks(filters: {

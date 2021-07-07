@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BookBundle } from 'src/app/models/BookBundle';
 import { BookService } from 'src/app/services/book.service';
@@ -96,7 +96,7 @@ export class BrowseViewComponent implements OnInit, OnDestroy {
   updateBookPacket(): void {
     if (this.viewResource) this.bookService.getGoogleBooks(this.payload);
     else {
-      this.connection_success = this.bookService.getBooks(this.payload);
+      this.bookService.getBooks(this.payload);
     }
   }
 

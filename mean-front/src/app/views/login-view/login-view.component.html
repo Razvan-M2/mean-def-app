@@ -1,8 +1,15 @@
+<app-page-header [pageTitle]="'Login Page'"></app-page-header>
 <div class="form-container">
   <form class="login-form" [formGroup]="loginForm">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input formControlName="email" matInput name="email" type="email" />
+      <mat-error *ngIf="loginForm.get('email').hasError('required')">
+        You must enter a value!
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email').hasError('email')">
+        Not a valid email!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -13,6 +20,9 @@
         name="password"
         type="password"
       />
+      <mat-error *ngIf="loginForm.get('password').hasError('required')">
+        Password is missing!
+      </mat-error>
     </mat-form-field>
     <button (click)="onSubmitForm()" mat-raised-button color="accent">
       Submit

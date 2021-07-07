@@ -11,25 +11,14 @@ const generateToken = (user, tokenExpire) => {
 };
 
 const validateFields = (userData) => {
-    // if(!userData)
-    // if(typeof(userData.firstName) === "undefined"){
-    //     return next(new ErrorResponse("User Fields Missing!", 422));
-    // }
-    // if(typeof(userData.lastName) === "undefined"){
-    //     return next(new ErrorResponse("User Fields Missing!", 422));
-    // }
-    // if(typeof(userData.email) === "undefined"){
-    //     return next(new ErrorResponse("User Fields Missing!", 422));
-    // }
-    // if(typeof(userData.password) === "undefined"){
-    //     return next(new ErrorResponse("User Fields Missing!", 422));
-    // }
-    return  typeof(userData)==="undefined" ||
-            typeof(userData.firstName) === "undefined" ||
-            typeof(userData.lastName) === "undefined" ||
-            typeof(userData.email) === "undefined" ||
-            typeof(userData.password) === "undefined";
-}
+    return (
+        typeof userData === "undefined" ||
+        typeof userData.firstName === "undefined" ||
+        typeof userData.lastName === "undefined" ||
+        typeof userData.email === "undefined" ||
+        typeof userData.password === "undefined"
+    );
+};
 
 exports.login = asyncHandler(async (req, res, next) => {
     const tokenExpire = process.env.JWT_EXPIRE;
@@ -40,7 +29,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     });
 
     if (!result) {
-        return next(new ErrorResponse("User not found!", 404));
+        return next(new ErrorResponse("User Email not found!", 404));
     }
     const user = await result.toJson();
 
@@ -84,9 +73,9 @@ exports.logout = asyncHandler(async (req, res, next) => {
 exports.register = asyncHandler(async (req, res, next) => {
     const { firstName, lastName, email, password } = req.body;
 
-    if(validateFields({...req.body})){
+    if (validateFields({ ...req.body })) {
         return next(new ErrorResponse("User Fields Missing!", 422));
-    };
+    }
 
     const result = await neodeInstance.first("User", {
         email,

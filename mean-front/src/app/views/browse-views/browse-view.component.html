@@ -50,6 +50,7 @@
 </div>
 
 <div class="list-section">
+  <!-- <div> -->
   <div class="list-section-header">
     <mat-form-field appearance="outline">
       <mat-label>Discipline</mat-label>
@@ -65,8 +66,8 @@
         >
       </mat-select>
     </mat-form-field>
-    <!-- <div class="list" *ngIf="this.connection_success; else noDataView"> -->
     <mat-paginator
+      *ngIf="this.dataPacket.count > 0"
       class="controller-item"
       [length]="this.dataPacket.count"
       [pageSize]="this.payload.limit"
@@ -74,27 +75,28 @@
       (page)="onPaginate($event)"
     ></mat-paginator>
   </div>
-
-  <app-default-list
-    (likeBookEvent)="likeBook($event)"
-    (unlikeBookEvent)="unlikeBook($event)"
-    [data]="{ books: this.dataPacket.data, search: this.payload.search }"
-    *ngIf="!this.payload.viewStyle; else gridview"
-  ></app-default-list>
-  <ng-template #gridview>
-    <app-grid-list
+  <div *ngIf="this.dataPacket.count > 0; else noDataView">
+    <app-default-list
+      (likeBookEvent)="likeBook($event)"
+      (unlikeBookEvent)="unlikeBook($event)"
       [data]="{ books: this.dataPacket.data, search: this.payload.search }"
-    ></app-grid-list>
+      *ngIf="!this.payload.viewStyle; else gridview"
+    ></app-default-list>
+    <ng-template #gridview>
+      <app-grid-list
+        [data]="{ books: this.dataPacket.data, search: this.payload.search }"
+      ></app-grid-list>
+    </ng-template>
+  </div>
+  <ng-template #noDataView>
+    <!-- <app-error></app-error> -->
   </ng-template>
   <mat-paginator
     class="footer-paginator"
+    *ngIf="this.dataPacket.count > 0"
     [length]="this.dataPacket.count"
     [pageSize]="this.payload.limit"
     [pageSizeOptions]="[4, 8, 12]"
     (page)="onPaginate($event)"
   ></mat-paginator>
-  <!-- </div> -->
-  <!-- <ng-template #noDataView>
-    <app-error></app-error>
-  </ng-template> -->
 </div>

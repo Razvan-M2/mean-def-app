@@ -94,7 +94,12 @@ exports.getBooks = asyncHandler(async (req, res, next) => {
     ).records.length;
 
     if (!data || !length) {
-        return next(new ErrorResponse("Error fetching all books.", 404));
+        // return next(new ErrorResponse("Error fetching all books.", 404));
+        res.status(200).json({
+            success: true,
+            data: [],
+            length: 0,
+        });
     }
 
     const formatedData = data.records.map((item, index) => {
