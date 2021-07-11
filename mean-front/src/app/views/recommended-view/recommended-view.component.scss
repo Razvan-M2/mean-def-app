@@ -112,3 +112,13 @@ $accent: #ffd740;
 .c-list-item-header-title:hover {
   color: $primary;
 }
+
+.recommended-message {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  margin-top: 200px;
+}

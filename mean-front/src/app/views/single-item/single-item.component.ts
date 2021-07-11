@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/Book';
 import { BookService } from 'src/app/services/book.service';
 
@@ -32,11 +32,14 @@ export class SingleItemComponent implements OnInit {
   ngOnInit(): void {}
 
   reviewBook(liked: boolean, idBook: number): void {
+    console.log(this.book);
     console.log('You reviewed a Book!');
+    console.log(liked);
     if (liked) {
-      this.bookService.likeBook(idBook).subscribe(
+      this.bookService.unlikeBook(idBook).subscribe(
         (response: { success: boolean }) => {
-          console.log(response);
+          this.book.liked = false;
+          this.book.endorsements--;
         },
         (error: HttpErrorResponse) => {
           console.log(error);
@@ -48,9 +51,10 @@ export class SingleItemComponent implements OnInit {
         }
       );
     } else {
-      this.bookService.unlikeBook(idBook).subscribe(
+      this.bookService.likeBook(idBook).subscribe(
         (response: { success: boolean }) => {
-          console.log(response);
+          this.book.liked = true;
+          this.book.endorsements++;
         },
         (error: HttpErrorResponse) => {
           console.log(error);

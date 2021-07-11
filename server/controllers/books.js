@@ -125,14 +125,51 @@ exports.getBooks = asyncHandler(async (req, res, next) => {
 
 exports.getBook = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
+    let idUser = 0;
 
-    const data = await neodeInstance.findById("Book", id);
+    if (req.headers.authorization) {
+        const token = req.headers.authorization.split(" ")[1];
+        if (token !== "undefined") {
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+            idUser = decodedToken.id;
+        }
+    }
 
-    console.log(data.properties());
+    //call{ with n match(u:User) where id(u) = ${userOptions.idUser} return exists((n)<-[:liked]-(u)) as is_liked}
+
+    // const data = await neodeInstance.findById("Book", id);
+
+    const data = await neodeInstance.cypher(
+        `match(b:Book) where id(b)=${id} call { with b match(u:User) where id(u) = ${idUser} return exists((b)<-[:liked]-(u)) as liked }return id(b) as id,b.thumbnail as thumbnail,b.pageCount as pageCount,b.description as description,b.language as language,b.discipline as discipline,b.title as title,b.isbn_10 as isbn_10,b.isbn_13 as isbn_13,b.endorsements as endorsements,b.publisher as publisher,b.publishedDate as publishedDate,b.authors as authors, liked`
+    );
+
+    // console.log(data.properties());
+    // const formattedData = {};
+    // data.records.map((item) => {
+    //     console.log(item);
+    //     // obj.Book.properties.endorsements = neo4j.integer.toNumber(
+    //     //     obj.Book.properties.endorsements
+    //     // );
+    //     // formattedData = {...item.Book};
+    //     // return {
+    //     //     id: neo4j.integer.toNumber(obj.Book.identity),
+    //     //     ...obj.Book.properties,
+    //     //     keywords: obj.keywords,
+    //     //     liked: obj.liked,
+    //     //     is_google_book: false,
+    //     // };
+    // });
+    const formattedData = data.records[0].toObject();
+    formattedData.id = neo4j.integer.toNumber(formattedData.id);
+    formattedData.pageCount = neo4j.integer.toNumber(formattedData.pageCount);
+    formattedData.endorsements = neo4j.integer.toNumber(
+        formattedData.endorsements
+    );
 
     res.status(200).json({
         success: true,
-        data: data.properties(),
+        // data: { ...data.properties(), id },
+        data: formattedData,
     });
 });
 
@@ -180,7 +217,7 @@ exports.getGoogleBooks = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        data: { data: formattedItems, length: response.data.totalItems },
+        data: { data: formattedItems, count: response.data.totalItems },
     });
 });
 

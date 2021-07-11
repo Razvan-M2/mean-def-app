@@ -42,7 +42,7 @@ export class BrowseViewComponent implements OnInit, OnDestroy {
 
   dataPacket: BookBundle = { count: 0, data: [] };
 
-  connection_success: boolean;
+  content_available: boolean;
 
   private bookSubscription: Subscription;
   private googleBooksSubscription: Subscription;
@@ -62,12 +62,26 @@ export class BrowseViewComponent implements OnInit, OnDestroy {
       .getBooksUpdateListener()
       .subscribe((serviceData: BookBundle) => {
         this.dataPacket = serviceData;
+        if (serviceData.count > 0) {
+          this.content_available = true;
+        } else {
+          this.content_available = false;
+        }
+        console.log(serviceData);
+        console.log(this.content_available);
       });
 
     this.googleBooksSubscription = this.bookService
       .getGoogleBooksUpdateListener()
       .subscribe((serviceData: BookBundle) => {
         this.dataPacket = serviceData;
+        if (serviceData.count > 0) {
+          this.content_available = true;
+        } else {
+          this.content_available = false;
+        }
+        console.log(serviceData);
+        console.log(this.content_available);
       });
     this.disciplinesSubscription = this.disciplinesService
       .getDisciplinesUpdateListener()

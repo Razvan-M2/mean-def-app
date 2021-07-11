@@ -1,4 +1,7 @@
-<div class="list-section">
+<div
+  class="list-section"
+  *ngIf="this.books.length > 0; else noRecommendedBooks"
+>
   <div class="c-list">
     <div class="c-list-item" *ngFor="let item of books">
       <div class="c-list-item-header">
@@ -53,3 +56,9 @@
     </div>
   </div>
 </div>
+<ng-template #noRecommendedBooks>
+  <div class="recommended-message">
+    <h1>No Books Recommended...</h1>
+    <h3>You Should Rate Some Books!</h3>
+  </div>
+</ng-template>

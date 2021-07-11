@@ -36,6 +36,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const isAuth = this.authService.getIsAuth();
+    console.log(this.authService.getIsAuth());
     if (!isAuth) {
       this.matSnackBar.open('Access prohibited.', 'Close', {
         duration: 2000,

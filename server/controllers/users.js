@@ -163,10 +163,19 @@ exports.getRecommendedBooks = asyncHandler(async (req, res, next) => {
             recommendation.pageCount
         );
 
-        data.push({
-            book,
-            recommendation,
-        });
+        let skipRecommendation = false;
+        // data.forEach((element) => {
+        //     if (element.recommendation.id == recommendation.id)
+        //         skipRecommendation = true;
+        // });
+        if (!skipRecommendation) {
+            console.log("Array does not contain");
+            console.log(recommendation);
+            data.push({
+                book,
+                recommendation,
+            });
+        }
     });
     res.status(200).json({
         success: true,

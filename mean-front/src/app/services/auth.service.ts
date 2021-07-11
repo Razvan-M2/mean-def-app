@@ -58,6 +58,7 @@ export class AuthService {
           this.token = response.token;
           this.tokenExpire = new Date(Date.now() + response.tokenExpire * 1000);
           this.authStatusListener.next(true);
+          this.isAuthenticated = true;
           this.setAuthTimer(response.tokenExpire);
           //  Expiration maintenance in front?
           this.setLocalStorage();

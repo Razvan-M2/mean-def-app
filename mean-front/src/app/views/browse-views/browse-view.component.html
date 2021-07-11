@@ -67,7 +67,7 @@
       </mat-select>
     </mat-form-field>
     <mat-paginator
-      *ngIf="this.dataPacket.count > 0"
+      *ngIf="content_available"
       class="controller-item"
       [length]="this.dataPacket.count"
       [pageSize]="this.payload.limit"
@@ -75,25 +75,24 @@
       (page)="onPaginate($event)"
     ></mat-paginator>
   </div>
-  <div *ngIf="this.dataPacket.count > 0; else noDataView">
-    <app-default-list
-      (likeBookEvent)="likeBook($event)"
-      (unlikeBookEvent)="unlikeBook($event)"
+  <!-- <div *ngIf="content_available; else noDataView"> -->
+  <app-default-list
+    (likeBookEvent)="likeBook($event)"
+    (unlikeBookEvent)="unlikeBook($event)"
+    [data]="{ books: this.dataPacket.data, search: this.payload.search }"
+    *ngIf="!this.payload.viewStyle; else gridview"
+  ></app-default-list>
+  <ng-template #gridview>
+    <app-grid-list
       [data]="{ books: this.dataPacket.data, search: this.payload.search }"
-      *ngIf="!this.payload.viewStyle; else gridview"
-    ></app-default-list>
-    <ng-template #gridview>
-      <app-grid-list
-        [data]="{ books: this.dataPacket.data, search: this.payload.search }"
-      ></app-grid-list>
-    </ng-template>
-  </div>
-  <ng-template #noDataView>
-    <!-- <app-error></app-error> -->
+    ></app-grid-list>
   </ng-template>
+  <!-- </div> -->
+  <!-- <ng-template #noDataView>
+  </ng-template> -->
   <mat-paginator
     class="footer-paginator"
-    *ngIf="this.dataPacket.count > 0"
+    *ngIf="content_available"
     [length]="this.dataPacket.count"
     [pageSize]="this.payload.limit"
     [pageSizeOptions]="[4, 8, 12]"
